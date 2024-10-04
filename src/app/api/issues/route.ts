@@ -2,9 +2,11 @@ import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
+
+
 const createIssueSchema = z.object({
-    title: z.string().min(1).max(255),
-    description: z.string().min(1),
+    title: z.string().min(1, 'Title too short').max(255),
+    description: z.string().min(1, 'Description too short').max(255),
 })
 
 export async function POST(req: NextRequest) {
@@ -12,7 +14,8 @@ export async function POST(req: NextRequest) {
     const isValidCreateIssueSchema = createIssueSchema.safeParse(body);
 
     if (!isValidCreateIssueSchema.success) {
-        return NextResponse.json({ message: isValidCreateIssueSchema.error.message }, { status: 400 });
+        console.error(isValidCreateIssueSchema.error);
+        return NextResponse.json({ message: isValidCreateIssueSchema.error.format() }, { status: 400 });
     }
     const newIssue = await prisma.issue.create({
         data: {

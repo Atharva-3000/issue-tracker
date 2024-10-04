@@ -30,7 +30,7 @@ export default function RootLayout({
         className={inter.variable}
       >
         <Theme accentColor="crimson" grayColor="gray">
-          <Toaster position="bottom-right" />
+          <Toaster position="bottom-right"/>
           <NavBar />
           <main className="p-5">
             {children}
