@@ -5,6 +5,7 @@ import "./globals.css";
 import NavBar from "./NavBar";
 import { Theme, ThemePanel } from "@radix-ui/themes";
 import { Inter } from 'next/font/google';
+import { Toaster } from "react-hot-toast";
 
 
 const inter = Inter({
@@ -29,6 +30,7 @@ export default function RootLayout({
         className={inter.variable}
       >
         <Theme accentColor="crimson" grayColor="gray">
+          <Toaster position="bottom-right" />
           <NavBar />
           <main className="p-5">
             {children}
