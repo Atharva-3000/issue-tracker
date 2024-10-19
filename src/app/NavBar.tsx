@@ -3,14 +3,16 @@ import { Bug } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import classnames from "classnames";
+import LogoutBtn from "./components/LogoutButton";
 export default function NavBar() {
     const currentPath = usePathname();
     const Links = [
         { heading: "Dashboard", href: "/" },
-        { heading: "Issues", href: "/issues" }
+        { heading: "Issues", href: "/issues" },
+
     ]
     return (
-        <nav className="flex space-x-6 border-b mb-5 px-5 h-14 items-center">
+        <nav className="flex space-x-6 border-b mb-5 px-5 h-14 items-center justify-between">
             <Link href={"/"}>
                 <Bug size={42} />
             </Link>
@@ -29,6 +31,15 @@ export default function NavBar() {
                     </li>
                 })}
             </ul>
+            <div className="flex gap-5">
+                <Link href={"/profile"} className=" hover:text-white text-lg transition-colors bg-black text-gray-400 px-4 rounded-xl">
+                    Account
+                </Link>
+                <Link href={"/login"} className=" hover:text-white text-lg transition-colors bg-black text-gray-400 px-4 rounded-xl">
+                    Login
+                </Link>
+                <LogoutBtn/>
+            </div>
         </nav>
     )
 }
